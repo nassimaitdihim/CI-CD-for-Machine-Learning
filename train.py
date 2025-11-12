@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
 import skops.io as sio
 
-drug_df = pd.read_csv("CI-CD-for-Machine-Learning/Data/drug.csv")
+drug_df = pd.read_csv("Data/drug.csv")
 drug_df = drug_df.sample(frac=1)
 drug_df.head(3)
 
@@ -45,19 +45,19 @@ f1 = f1_score(y_test, predictions, average="macro")
 
 print("Accuracy:", str(round(accuracy, 2) * 100) + "%", "F1:", round(f1, 2))
 
-with open("CI-CD-for-Machine-Learning/Results/metrics.txt", "w") as outfile:
+with open("Results/metrics.txt", "w") as outfile:
     outfile.write(f"\nAccuracy = {round(accuracy, 2)}, F1 Score = {round(f1, 2)}.")
 
 cm = confusion_matrix(y_test, predictions, labels=pipe.classes_)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=pipe.classes_)
 disp.plot()
-plt.savefig("CI-CD-for-Machine-Learning/Results/model_results.png", dpi=120)
+plt.savefig("Results/model_results.png", dpi=120)
 
-sio.dump(pipe, "CI-CD-for-Machine-Learning/Model/drug_pipeline.skops")
+sio.dump(pipe, "Model/drug_pipeline.skops")
 
 untrusted_types = sio.get_untrusted_types(
-    file="CI-CD-for-Machine-Learning/Model/drug_pipeline.skops"
+    file="Model/drug_pipeline.skops"
 )
 sio.load(
-    "CI-CD-for-Machine-Learning/Model/drug_pipeline.skops", trusted=untrusted_types
+    "Model/drug_pipeline.skops", trusted=untrusted_types
 )
