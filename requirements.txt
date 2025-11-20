@@ -3,9 +3,3 @@ pandas
 scikit-learn
 matplotlib
 skops
-huggingface_hub>=1.0.0
-hf-transfer
-requests
-tqdm
-filelock
-fsspec
