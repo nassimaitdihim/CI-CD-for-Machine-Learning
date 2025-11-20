@@ -3,4 +3,9 @@ pandas
 scikit-learn
 matplotlib
 skops
-huggingface_hub[cli-tools]
+huggingface_hub[cli-tools]>=1.0.0
+hf-transfer
+requests
+tqdm
+filelock
+fsspec
